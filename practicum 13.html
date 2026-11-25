@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Riverside General Hospital: departments, doctors, services, virtual tour, video, audio, map and appointment booking.">
+  <title>Riverside General Hospital | Departments, Doctors and Patient Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body id="top">
+
+<header>
+  <div class="brand">
+    <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='10' fill='white'/%3E%3Cpath d='M23 10h10v13h13v10H33v13H23V33H10V23h13z' fill='%230f6b63'/%3E%3C/svg%3E" alt="Riverside General Hospital logo: a green cross">
+    <div>
+      <h1>Riverside General Hospital</h1>
+      <p>Care for every stage of life</p>
+    </div>
+  </div>
+  <!-- NOTIFICATIONS: bell button opens an animated panel (script.js) -->
+  <div class="bell-wrap needs-js">
+    <button type="button" class="bell-btn" id="bell-btn" aria-expanded="false" aria-controls="bell-panel" aria-label="Notifications, 3 unread">
+      <svg class="bell-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a1.5 1.5 0 0 0-1.5 1.5v.6A6.5 6.5 0 0 0 5.5 10.5v3.2L3.7 16.5A1 1 0 0 0 4.5 18h15a1 1 0 0 0 .8-1.5l-1.8-2.8v-3.2a6.5 6.5 0 0 0-5-6.4v-.6A1.5 1.5 0 0 0 12 2zm-2.5 17a2.5 2.5 0 0 0 5 0z"/></svg>
+      <span class="bell-count" id="bell-count">3</span>
+    </button>
+    <div class="bell-panel" id="bell-panel" role="region" aria-label="Hospital notices">
+      <div class="bell-head">
+        <h2 class="bell-title">Notices</h2>
+        <button type="button" class="link-btn" id="mark-read">Mark all as read</button>
+      </div>
+      <ul class="note-list" id="note-list">
+        <li class="note-item">
+          <span class="note-dot" aria-hidden="true"></span>
+          <div class="note-body">
+            <strong>Consultants available today</strong>
+            <span>Cardiology, Orthopaedics, Paediatrics and Obstetrics &amp; Gynaecology clinics are running.</span>
+          </div>
+          <button type="button" class="icon-btn note-dismiss" aria-label="Dismiss notice: Consultants available today">&times;</button>
+        </li>
+        <li class="note-item">
+          <span class="note-dot" aria-hidden="true"></span>
+          <div class="note-body">
+            <strong>Register online</strong>
+            <span>Fill in the registration form to request an appointment without queuing at the desk.</span>
+          </div>
+          <button type="button" class="icon-btn note-dismiss" aria-label="Dismiss notice: Register online">&times;</button>
+        </li>
+        <li class="note-item">
+          <span class="note-dot" aria-hidden="true"></span>
+          <div class="note-body">
+            <strong>Open around the clock</strong>
+            <span>The pharmacy and the Emergency Department are open 24 hours, every day.</span>
+          </div>
+          <button type="button" class="icon-btn note-dismiss" aria-label="Dismiss notice: Open around the clock">&times;</button>
+        </li>
+      </ul>
+      <p class="bell-empty" id="bell-empty">You are all caught up.</p>
+    </div>
+  </div>
+
+  <!-- Hidden checkbox + label = CSS-only menu button (shown on small screens) -->
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open or close the menu">
+  <label for="nav-toggle" class="nav-toggle-label">
+    <span class="nav-toggle-icon" aria-hidden="true"></span>
+    <span>Menu</span>
+  </label>
+
+  <nav class="main-nav" aria-label="Main navigation">
+    <ul class="nav-list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#departments">Departments</a></li>
+      <li><a href="#doctors">Doctors</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#health-data">Health data</a></li>
+      <li><a href="#tasks">Tasks</a></li>
+      <li><a href="#tour">Virtual tour</a></li>
+      <li><a href="#media">Video &amp; audio</a></li>
+      <li><a href="#location">Find us</a></li>
+      <li><a href="#emergency">Emergency</a></li>
+      <li><a class="nav-cta" href="#appointment">Register / Book</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="emergency-bar" role="note">
+  <span>Medical emergency? Call <a href="tel:108">108</a> or visit our Emergency Department, open 24 hours.</span>
+  <button type="button" class="bar-close needs-js" aria-label="Hide the emergency banner">&times;</button>
+</div>
+
+<main>
+
+  <!-- ABOUT: <picture> gives the browser a choice of image -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="hero">
+      <div>
+        <h2 id="about-title">About the hospital</h2>
+        <p>Riverside General Hospital is a 450-bed multi-specialty hospital that has served the community since 1994. Our teams provide emergency care, planned surgery, maternity and child health, and long-term treatment under one roof.</p>
+        <p><a href="#media">Watch our introduction video</a>, <a href="#tour">take the virtual tour</a> or <a href="#appointment">book an appointment</a>.</p>
+
+        <!-- HEARTBEAT: the line draws itself on page load; the button replays it -->
+        <div class="pulse-strip">
+          <svg viewBox="0 0 450 60" aria-hidden="true" focusable="false">
+            <path class="ecg-line" pathLength="1" d="M0 30H30L38 24L46 30H60L66 34L72 4L80 56L86 30H100L112 20L124 30H150 M150 30H180L188 24L196 30H210L216 34L222 4L230 56L236 30H250L262 20L274 30H300 M300 30H330L338 24L346 30H360L366 34L372 4L380 56L386 30H400L412 20L424 30H450"/>
+          </svg>
+          <span class="pulse-label">Emergency care, open 24 hours</span>
+          <button type="button" class="btn-small pulse-replay needs-js" id="pulse-replay" aria-label="Replay the heartbeat animation">Replay</button>
+        </div>
+      </div>
+      <figure>
+        <picture>
+          <!-- Replace with real photos: <source media="(min-width:700px)" srcset="hospital-large.jpg"> -->
+          <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e6f2ef'/%3E%3Crect x='90' y='70' width='220' height='190' fill='%23ffffff' stroke='%230f6b63' stroke-width='4'/%3E%3Crect x='170' y='20' width='60' height='50' fill='%230f6b63'/%3E%3Cpath d='M192 28h16v10h10v14h-10v10h-16V52h-10V38h10z' fill='%23ffffff'/%3E%3Cg fill='%23c5d9d4'%3E%3Crect x='110' y='100' width='30' height='30'/%3E%3Crect x='185' y='100' width='30' height='30'/%3E%3Crect x='260' y='100' width='30' height='30'/%3E%3Crect x='110' y='150' width='30' height='30'/%3E%3Crect x='185' y='150' width='30' height='30'/%3E%3Crect x='260' y='150' width='30' height='30'/%3E%3C/g%3E%3Crect x='175' y='205' width='50' height='55' fill='%230f6b63'/%3E%3C/svg%3E" alt="Illustration of the Riverside General Hospital main building with a green cross on the tower" width="400" height="300">
+        </picture>
+        <figcaption>Main building, Lake Road campus</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="departments" aria-labelledby="dept-title">
+    <h2 id="dept-title">Departments</h2>
+    <div class="grid">
+      <article>
+        <h3>Cardiology</h3>
+        <p>Heart and blood vessel care.</p>
+        <ul>
+          <li>ECG, echo and stress tests</li>
+          <li>Angiography and angioplasty</li>
+          <li>Cardiac rehabilitation</li>
+        </ul>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-toggle-panel aria-expanded="false" aria-controls="dept-cardiology" aria-label="Cardiology clinic details">
+            <span class="btn-label">Clinic details</span><span class="chevron" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="panel" id="dept-cardiology">
+          <div class="panel-inner">
+            <dl class="facts">
+              <div><dt>Doctor</dt><dd>Dr. Anita Raman</dd></div>
+              <div><dt>Days</dt><dd>Mon, Wed, Fri</dd></div>
+              <div><dt>Time</dt><dd>9:00 am to 1:00 pm</dd></div>
+            </dl>
+            <button type="button" class="btn-solid needs-js" data-book-dept="Cardiology">Book Cardiology</button>
+          </div>
+        </div>
+      </article>
+      <article>
+        <h3>Orthopaedics</h3>
+        <p>Bones, joints and sports injuries.</p>
+        <ul>
+          <li>Joint replacement</li>
+          <li>Fracture care</li>
+          <li>Physiotherapy</li>
+        </ul>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-toggle-panel aria-expanded="false" aria-controls="dept-orthopaedics" aria-label="Orthopaedics clinic details">
+            <span class="btn-label">Clinic details</span><span class="chevron" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="panel" id="dept-orthopaedics">
+          <div class="panel-inner">
+            <dl class="facts">
+              <div><dt>Doctor</dt><dd>Dr. Karthik Subramanian</dd></div>
+              <div><dt>Days</dt><dd>Tue, Thu, Sat</dd></div>
+              <div><dt>Time</dt><dd>10:00 am to 2:00 pm</dd></div>
+            </dl>
+            <button type="button" class="btn-solid needs-js" data-book-dept="Orthopaedics">Book Orthopaedics</button>
+          </div>
+        </div>
+      </article>
+      <article>
+        <h3>Paediatrics</h3>
+        <p>Care for infants, children and teenagers.</p>
+        <ul>
+          <li>Vaccination clinic</li>
+          <li>Newborn care unit</li>
+          <li>Child development checks</li>
+        </ul>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-toggle-panel aria-expanded="false" aria-controls="dept-paediatrics" aria-label="Paediatrics clinic details">
+            <span class="btn-label">Clinic details</span><span class="chevron" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="panel" id="dept-paediatrics">
+          <div class="panel-inner">
+            <dl class="facts">
+              <div><dt>Doctor</dt><dd>Dr. Meera Nair</dd></div>
+              <div><dt>Days</dt><dd>Mon to Fri</dd></div>
+              <div><dt>Time</dt><dd>8:00 am to 12:00 noon</dd></div>
+            </dl>
+            <button type="button" class="btn-solid needs-js" data-book-dept="Paediatrics">Book Paediatrics</button>
+          </div>
+        </div>
+      </article>
+      <article>
+        <h3>Obstetrics &amp; Gynaecology</h3>
+        <p>Pregnancy, childbirth and women's health.</p>
+        <ul>
+          <li>Antenatal clinic</li>
+          <li>Labour and delivery suites</li>
+          <li>Fertility counselling</li>
+        </ul>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-toggle-panel aria-expanded="false" aria-controls="dept-obstetrics-gynaecology" aria-label="Obstetrics &amp; Gynaecology clinic details">
+            <span class="btn-label">Clinic details</span><span class="chevron" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="panel" id="dept-obstetrics-gynaecology">
+          <div class="panel-inner">
+            <dl class="facts">
+              <div><dt>Doctor</dt><dd>Dr. Farah Hussain</dd></div>
+              <div><dt>Days</dt><dd>Tue, Thu, Fri</dd></div>
+              <div><dt>Time</dt><dd>2:00 pm to 6:00 pm</dd></div>
+            </dl>
+            <button type="button" class="btn-solid needs-js" data-book-dept="Obstetrics &amp; Gynaecology">Book Obstetrics &amp; Gynaecology</button>
+          </div>
+        </div>
+      </article>
+      <article>
+        <h3>Neurology</h3>
+        <p>Brain, spine and nerve disorders.</p>
+        <ul>
+          <li>EEG and nerve studies</li>
+          <li>Stroke unit</li>
+          <li>Headache clinic</li>
+        </ul>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-toggle-panel aria-expanded="false" aria-controls="dept-neurology" aria-label="Neurology clinic details">
+            <span class="btn-label">Clinic details</span><span class="chevron" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="panel" id="dept-neurology">
+          <div class="panel-inner">
+            <dl class="facts">
+              <div><dt>Doctor</dt><dd>Assigned when you book</dd></div>
+              <div><dt>Days</dt><dd>Mon to Sat</dd></div>
+              <div><dt>Time</dt><dd>8 am to 6 pm</dd></div>
+            </dl>
+            <button type="button" class="btn-solid needs-js" data-book-dept="Neurology">Book Neurology</button>
+          </div>
+        </div>
+      </article>
+      <article>
+        <h3>General Medicine</h3>
+        <p>First point of care for adults.</p>
+        <ul>
+          <li>Diabetes and blood pressure care</li>
+          <li>Preventive health checks</li>
+          <li>Infectious disease clinic</li>
+        </ul>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-toggle-panel aria-expanded="false" aria-controls="dept-general-medicine" aria-label="General Medicine clinic details">
+            <span class="btn-label">Clinic details</span><span class="chevron" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="panel" id="dept-general-medicine">
+          <div class="panel-inner">
+            <dl class="facts">
+              <div><dt>Doctor</dt><dd>Assigned when you book</dd></div>
+              <div><dt>Days</dt><dd>Mon to Sat</dd></div>
+              <div><dt>Time</dt><dd>8 am to 6 pm</dd></div>
+            </dl>
+            <button type="button" class="btn-solid needs-js" data-book-dept="General Medicine">Book General Medicine</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="doctors" aria-labelledby="doc-title">
+    <h2 id="doc-title">Our doctors</h2>
+    <div class="grid">
+      <article>
+        <span class="badge badge-live">Available today</span>
+        <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Crect width='90' height='90' fill='%23e6f2ef'/%3E%3Ccircle cx='45' cy='34' r='16' fill='%230f6b63'/%3E%3Cpath d='M12 90c0-22 14-34 33-34s33 12 33 34z' fill='%230f6b63'/%3E%3C/svg%3E" alt="Portrait of Dr. Anita Raman" width="90" height="90">
+        <h3>Dr. Anita Raman</h3><span class="tag">Cardiology</span>
+        <p>Head of Cardiology. MD, DM. 18 years in interventional cardiology.</p>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-doctor aria-label="View profile: Dr. Anita Raman"><span class="btn-label">View profile</span></button>
+        </div>
+      </article>
+      <article>
+        <span class="badge badge-live">Available today</span>
+        <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Crect width='90' height='90' fill='%23e6f2ef'/%3E%3Ccircle cx='45' cy='34' r='16' fill='%230f6b63'/%3E%3Cpath d='M12 90c0-22 14-34 33-34s33 12 33 34z' fill='%230f6b63'/%3E%3C/svg%3E" alt="Portrait of Dr. Karthik Subramanian" width="90" height="90">
+        <h3>Dr. Karthik Subramanian</h3><span class="tag">Orthopaedics</span>
+        <p>Senior Consultant. MS (Ortho). Knee and hip replacement.</p>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-doctor aria-label="View profile: Dr. Karthik Subramanian"><span class="btn-label">View profile</span></button>
+        </div>
+      </article>
+      <article>
+        <span class="badge badge-live">Available today</span>
+        <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Crect width='90' height='90' fill='%23e6f2ef'/%3E%3Ccircle cx='45' cy='34' r='16' fill='%230f6b63'/%3E%3Cpath d='M12 90c0-22 14-34 33-34s33 12 33 34z' fill='%230f6b63'/%3E%3C/svg%3E" alt="Portrait of Dr. Meera Nair" width="90" height="90">
+        <h3>Dr. Meera Nair</h3><span class="tag">Paediatrics</span>
+        <p>Consultant Paediatrician. MD. Newborn and adolescent health.</p>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-doctor aria-label="View profile: Dr. Meera Nair"><span class="btn-label">View profile</span></button>
+        </div>
+      </article>
+      <article>
+        <span class="badge badge-live">Available today</span>
+        <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Crect width='90' height='90' fill='%23e6f2ef'/%3E%3Ccircle cx='45' cy='34' r='16' fill='%230f6b63'/%3E%3Cpath d='M12 90c0-22 14-34 33-34s33 12 33 34z' fill='%230f6b63'/%3E%3C/svg%3E" alt="Portrait of Dr. Farah Hussain" width="90" height="90">
+        <h3>Dr. Farah Hussain</h3><span class="tag">Obstetrics &amp; Gynaecology</span>
+        <p>Consultant. MS (OBG). High-risk pregnancy care.</p>
+        <div class="card-actions needs-js">
+          <button type="button" class="btn-small" data-doctor aria-label="View profile: Dr. Farah Hussain"><span class="btn-label">View profile</span></button>
+        </div>
+      </article>
+    </div>
+
+    <h3>Weekly consultation timetable</h3>
+    <div class="table-wrap">
+      <table class="stack-table">
+        <caption>Outpatient clinic hours by department</caption>
+        <thead><tr><th scope="col">Department</th><th scope="col">Doctor</th><th scope="col">Days</th><th scope="col">Time</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Cardiology</th><td data-label="Doctor">Dr. Anita Raman</td><td data-label="Days">Mon, Wed, Fri</td><td data-label="Time">9:00 am to 1:00 pm</td></tr>
+          <tr><th scope="row">Orthopaedics</th><td data-label="Doctor">Dr. Karthik Subramanian</td><td data-label="Days">Tue, Thu, Sat</td><td data-label="Time">10:00 am to 2:00 pm</td></tr>
+          <tr><th scope="row">Paediatrics</th><td data-label="Doctor">Dr. Meera Nair</td><td data-label="Days">Mon to Fri</td><td data-label="Time">8:00 am to 12:00 noon</td></tr>
+          <tr><th scope="row">Obstetrics &amp; Gynaecology</th><td data-label="Doctor">Dr. Farah Hussain</td><td data-label="Days">Tue, Thu, Fri</td><td data-label="Time">2:00 pm to 6:00 pm</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- DOCTOR DIRECTORY MANAGER: add, display, modify and remove doctors (script.js, part 11) -->
+  <section id="manage" class="needs-js" aria-labelledby="manage-title">
+    <h2 id="manage-title">Doctor directory manager</h2>
+    <p class="notice">Add a doctor, edit or hide one, search the list, or remove an entry. The list changes instantly and the page never reloads.</p>
+
+    <div class="manager">
+      <!-- Add / edit form: the same panel is used for both jobs -->
+      <div class="mgr-form" id="staff-form">
+        <h3 id="mgr-form-title">Add a doctor</h3>
+        <div class="field">
+          <label for="s-name" class="req">Doctor name</label>
+          <input type="text" id="s-name" maxlength="40" placeholder="Dr. Full Name" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="s-dept" class="req">Department</label>
+          <input type="text" id="s-dept" list="dept-options" maxlength="40" placeholder="Choose or type a department" autocomplete="off">
+          <datalist id="dept-options">
+            <option value="Cardiology"></option>
+            <option value="Orthopaedics"></option>
+            <option value="Paediatrics"></option>
+            <option value="Obstetrics &amp; Gynaecology"></option>
+            <option value="Neurology"></option>
+            <option value="General Medicine"></option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label for="s-hours">Clinic days and time</label>
+          <input type="text" id="s-hours" maxlength="60" placeholder="e.g. Mon, Wed, 9:00 am to 1:00 pm" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="s-bio">Short bio</label>
+          <input type="text" id="s-bio" maxlength="120" placeholder="Qualification and area of interest" autocomplete="off">
+        </div>
+        <label class="check-line"><input type="checkbox" id="s-available" checked> <span>Available today</span></label>
+        <p class="mgr-error" id="mgr-error" role="alert"></p>
+        <div class="actions">
+          <button type="button" class="btn-solid" id="mgr-save">Add doctor</button>
+          <button type="button" class="btn-small" id="mgr-cancel" hidden>Cancel edit</button>
+        </div>
+      </div>
+
+      <!-- Display: the list below is built by script.js -->
+      <div class="mgr-list-wrap">
+        <div class="mgr-toolbar">
+          <input type="text" id="s-search" placeholder="Search by name or department" aria-label="Search doctors" autocomplete="off">
+          <span class="mgr-count" id="mgr-count" aria-live="polite"></span>
+        </div>
+        <ul class="staff-list" id="staff-list"></ul>
+        <p class="mgr-empty" id="mgr-empty" hidden>No doctors to show. Add one with the form, or clear the search box.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" aria-labelledby="serv-title">
+    <h2 id="serv-title">Medical services</h2>
+    <div class="grid">
+      <article><h3>Diagnostics</h3><ul><li>Pathology laboratory</li><li>X-ray, CT and MRI</li><li>Ultrasound</li></ul></article>
+      <article><h3>Treatment and surgery</h3><ul><li>Day-care procedures</li><li>Operating theatres</li><li>Intensive care (ICU)</li></ul></article>
+      <article><h3>Support services</h3><ul><li>Pharmacy, open 24 hours</li><li>Ambulance service</li><li>Dietitian and physiotherapy</li></ul></article>
+    </div>
+  </section>
+
+  <!-- PUBLIC HEALTH STATISTICS: fetched from an API and built into a table by script.js (part 12) -->
+  <section id="health-data" class="needs-js" aria-labelledby="hd-title">
+    <h2 id="hd-title">Public health statistics</h2>
+    <p class="notice">This table is loaded live from the open <strong>disease.sh</strong> API (COVID-19 totals reported by country). Choose a continent to filter it, or refresh to request the data again.</p>
+
+    <div class="hd-toolbar">
+      <div class="hd-filters" id="hd-filters" role="group" aria-label="Filter by continent"></div>
+      <button type="button" class="btn-small" id="hd-refresh">Refresh data</button>
+    </div>
+
+    <!-- LOADING INDICATOR -->
+    <div class="hd-loading" id="hd-loading" role="status" aria-live="polite" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Loading health statistics&hellip;</p>
+    </div>
+
+    <!-- ERROR MESSAGE -->
+    <div class="hd-error" id="hd-error" role="alert" hidden>
+      <p id="hd-error-msg"></p>
+      <button type="button" class="btn-solid" id="hd-retry">Try again</button>
+    </div>
+
+    <!-- DATA: summary cards + table -->
+    <div id="hd-content" hidden>
+      <div class="hd-stats" id="hd-stats"></div>
+      <div class="table-wrap">
+        <table class="stack-table">
+          <caption>Countries ranked by total reported cases</caption>
+          <thead>
+            <tr>
+              <th scope="col">Country</th>
+              <th scope="col">Continent</th>
+              <th scope="col">Total cases</th>
+              <th scope="col">Deaths</th>
+              <th scope="col">Recovered</th>
+              <th scope="col">Death rate</th>
+            </tr>
+          </thead>
+          <tbody id="hd-body"></tbody>
+        </table>
+      </div>
+      <div class="hd-footer">
+        <p id="hd-meta"></p>
+        <button type="button" class="btn-small" id="hd-more"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOSPITAL TASK MANAGER: create, read, update and delete tasks; saved in localStorage (script.js, part 13) -->
+  <section id="tasks" class="needs-js" aria-labelledby="tk-title">
+    <h2 id="tk-title">Hospital task manager</h2>
+    <p class="notice">Plan the work of wards and support teams. Add a task, change its status, edit it or delete it. Tasks are saved in this browser (Local Storage), so they are still here after you refresh the page.</p>
+
+    <!-- SUMMARY: counts are filled in by script.js -->
+    <ul class="tk-summary" id="tk-summary" aria-label="Task summary">
+      <li><strong id="tk-count-all">0</strong><span>Total tasks</span></li>
+      <li><strong id="tk-count-todo">0</strong><span>To do</span></li>
+      <li><strong id="tk-count-progress">0</strong><span>In progress</span></li>
+      <li><strong id="tk-count-done">0</strong><span>Done</span></li>
+      <li class="tk-summary-alert"><strong id="tk-count-overdue">0</strong><span>Overdue</span></li>
+    </ul>
+
+    <!-- CREATE / UPDATE: the same form is used to add a task and to edit one -->
+    <form class="task-form" id="tk-form" novalidate>
+      <h3 id="tk-form-title">Add a task</h3>
+      <div class="row">
+        <div class="field">
+          <label for="tk-title-input" class="req">Task title</label>
+          <input type="text" id="tk-title-input" maxlength="80" placeholder="e.g. Restock the crash cart" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="tk-ward" class="req">Ward / department</label>
+          <select id="tk-ward">
+            <option value="">Choose a ward</option>
+            <option>Emergency Department</option>
+            <option>Cardiology</option>
+            <option>Orthopaedics</option>
+            <option>Paediatrics</option>
+            <option>Obstetrics &amp; Gynaecology</option>
+            <option>Neurology</option>
+            <option>General Medicine</option>
+            <option>Pharmacy</option>
+            <option>Laboratory</option>
+            <option>Housekeeping &amp; Facilities</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="tk-assignee">Assigned to</label>
+          <input type="text" id="tk-assignee" maxlength="40" placeholder="Name or role" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="tk-priority">Priority</label>
+          <select id="tk-priority">
+            <option value="high">High</option>
+            <option value="medium" selected>Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tk-status">Status</label>
+          <select id="tk-status">
+            <option value="todo" selected>To do</option>
+            <option value="progress">In progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tk-due">Due date</label>
+          <input type="date" id="tk-due">
+        </div>
+      </div>
+      <div class="field">
+        <label for="tk-notes">Notes <span class="hint">(optional)</span></label>
+        <textarea id="tk-notes" rows="2" maxlength="200" placeholder="Extra details for the team"></textarea>
+      </div>
+      <p class="mgr-error" id="tk-error" role="alert"></p>
+      <div class="actions">
+        <button type="submit" class="btn-solid" id="tk-submit">Add task</button>
+        <button type="button" class="btn-small" id="tk-cancel" hidden>Cancel edit</button>
+      </div>
+    </form>
+
+    <!-- READ: search, filter and the task table -->
+    <div class="tk-toolbar">
+      <input type="text" id="tk-search" placeholder="Search tasks, wards or people" aria-label="Search tasks" autocomplete="off">
+      <select id="tk-filter" aria-label="Filter tasks by status">
+        <option value="all">All statuses</option>
+        <option value="todo">To do</option>
+        <option value="progress">In progress</option>
+        <option value="done">Done</option>
+      </select>
+      <button type="button" class="btn-small btn-danger" id="tk-clear-done">Clear completed</button>
+    </div>
+
+    <div class="table-wrap" id="tk-table-wrap">
+      <table class="stack-table">
+        <caption>Task list</caption>
+        <thead>
+          <tr>
+            <th scope="col">Task</th>
+            <th scope="col">Ward</th>
+            <th scope="col">Assigned to</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Due</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tk-body"></tbody>
+      </table>
+    </div>
+    <p class="tk-empty" id="tk-empty" hidden></p>
+    <p class="tk-meta" id="tk-meta" aria-live="polite"></p>
+  </section>
+
+  <!-- VIRTUAL TOUR: image gallery built with CSS Grid (every photo has the same 4:3 size) -->
+  <section id="tour" aria-labelledby="tour-title">
+    <h2 id="tour-title">Virtual tour of our facilities</h2>
+    <p>Eight areas of the hospital, shown at the same size. Each caption names the area and tells you what to expect there.</p>
+
+    <!-- TOUR TRACKER: fills as areas are marked visited -->
+    <div class="tour-progress needs-js">
+      <p class="tour-progress-text"><span class="tour-count" id="tour-count">0</span> of <span id="tour-total">8</span> areas visited</p>
+      <button type="button" class="btn-small" id="tour-reset">Reset tour</button>
+      <div class="progress-track" role="progressbar" aria-label="Tour progress" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
+        <div class="progress-bar" id="tour-bar"></div>
+      </div>
+    </div>
+    <ul class="gallery">
+      <li>
+        <figure class="shot">
+          <div class="shot-frame">
+            <img loading="lazy" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23fdecea'/%3E%3Crect y='232' width='400' height='68' fill='%23f3d3cf'/%3E
+%3Crect x='55' y='122' width='205' height='88' rx='10' fill='%23fff' stroke='%23b3261e' stroke-width='4'/%3E
+%3Cpath d='M260 146h42l28 30v34h-70z' fill='%23fff' stroke='%23b3261e' stroke-width='4' stroke-linejoin='round'/%3E
+%3Cpath d='M272 154h26l16 20h-42z' fill='%23fdecea' stroke='%23b3261e' stroke-width='3'/%3E
+%3Cpath d='M148 140h20v14h14v20h-14v14h-20v-14h-14v-20h14z' fill='%23b3261e'/%3E%3Crect x='132' y='106' width='52' height='14' rx='4' fill='%23b3261e'/%3E
+%3Ccircle cx='105' cy='214' r='20' fill='%2316302b'/%3E%3Ccircle cx='105' cy='214' r='7' fill='%23fff'/%3E
+%3Ccircle cx='290' cy='214' r='20' fill='%2316302b'/%3E%3Ccircle cx='290' cy='214' r='7' fill='%23fff'/%3E%3C/svg%3E" alt="Illustration of a white ambulance with a red cross parked at the emergency bay" width="400" height="300">
+            <span class="visited-mark" aria-hidden="true">Visited</span>
+          </div>
+          <figcaption>
+            <span class="tag">Emergency</span>
+            <strong class="shot-title">Emergency Department</strong>
+            <span class="shot-text">Ambulance bay with direct access to the resuscitation rooms, staffed 24 hours a day.</span>
+            <button type="button" class="btn-small needs-js" data-explore aria-pressed="false" aria-label="Mark as visited: Emergency Department">Mark as visited</button>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="shot">
+          <div class="shot-frame">
+            <img loading="lazy" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e6f2ef'/%3E%3Crect y='226' width='400' height='74' fill='%23cfe3de'/%3E
+%3Crect x='36' y='128' width='14' height='98' rx='3' fill='%230f6b63'/%3E%3Crect x='36' y='168' width='148' height='28' rx='4' fill='%23fff' stroke='%230f6b63' stroke-width='4'/%3E
+%3Crect x='56' y='148' width='46' height='18' rx='8' fill='%23e6f2ef' stroke='%230f6b63' stroke-width='3'/%3E%3Crect x='178' y='196' width='6' height='30' fill='%230f6b63'/%3E
+%3Crect x='216' y='128' width='14' height='98' rx='3' fill='%230f6b63'/%3E%3Crect x='216' y='168' width='148' height='28' rx='4' fill='%23fff' stroke='%230f6b63' stroke-width='4'/%3E
+%3Crect x='236' y='148' width='46' height='18' rx='8' fill='%23e6f2ef' stroke='%230f6b63' stroke-width='3'/%3E%3Crect x='358' y='196' width='6' height='30' fill='%230f6b63'/%3E
+%3Cpath d='M200 70v156M186 70h28M186 226h28' stroke='%230f6b63' stroke-width='4' fill='none'/%3E
+%3Crect x='192' y='78' width='16' height='28' rx='4' fill='%23fff' stroke='%230f6b63' stroke-width='3'/%3E%3C/svg%3E" alt="Illustration of two hospital beds with a drip stand between them" width="400" height="300">
+            <span class="visited-mark" aria-hidden="true">Visited</span>
+          </div>
+          <figcaption>
+            <span class="tag">Inpatient care</span>
+            <strong class="shot-title">General ward</strong>
+            <span class="shot-text">Shared rooms with a bed, call button and drip stand at every bedside.</span>
+            <button type="button" class="btn-small needs-js" data-explore aria-pressed="false" aria-label="Mark as visited: General ward">Mark as visited</button>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="shot">
+          <div class="shot-frame">
+            <img loading="lazy" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e6f2ef'/%3E%3Crect y='238' width='400' height='62' fill='%23cfe3de'/%3E
+%3Crect x='100' y='54' width='200' height='170' rx='24' fill='%23fff' stroke='%230f6b63' stroke-width='4'/%3E
+%3Ccircle cx='200' cy='138' r='52' fill='%23c5d9d4' stroke='%230f6b63' stroke-width='4'/%3E%3Ccircle cx='200' cy='138' r='34' fill='%23e6f2ef' stroke='%230f6b63' stroke-width='3'/%3E
+%3Crect x='60' y='146' width='280' height='14' rx='4' fill='%230f6b63'/%3E%3Crect x='170' y='160' width='60' height='60' fill='%230f6b63' opacity='.35'/%3E
+%3Ccircle cx='278' cy='80' r='6' fill='%23b3261e'/%3E%3C/svg%3E" alt="Illustration of an MRI scanner with the patient table sliding into it" width="400" height="300">
+            <span class="visited-mark" aria-hidden="true">Visited</span>
+          </div>
+          <figcaption>
+            <span class="tag">Diagnostics</span>
+            <strong class="shot-title">Radiology suite</strong>
+            <span class="shot-text">MRI and CT scanners with a patient changing area next to the waiting room.</span>
+            <button type="button" class="btn-small needs-js" data-explore aria-pressed="false" aria-label="Mark as visited: Radiology suite">Mark as visited</button>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="shot">
+          <div class="shot-frame">
+            <img loading="lazy" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e6f2ef'/%3E%3Crect y='238' width='400' height='62' fill='%23cfe3de'/%3E
+%3Cpath d='M200 0v34' stroke='%230f6b63' stroke-width='6'/%3E%3Ccircle cx='200' cy='78' r='46' fill='%23fff' stroke='%230f6b63' stroke-width='4'/%3E
+%3Ccircle cx='200' cy='78' r='28' fill='%23e6f2ef' stroke='%230f6b63' stroke-width='3'/%3E%3Ccircle cx='200' cy='78' r='10' fill='%23f2a900'/%3E
+%3Crect x='110' y='188' width='180' height='18' rx='6' fill='%230f6b63'/%3E%3Crect x='190' y='206' width='20' height='32' fill='%230f6b63'/%3E%3Crect x='160' y='236' width='80' height='8' rx='3' fill='%230f6b63'/%3E
+%3Crect x='338' y='158' width='12' height='80' fill='%23c5d9d4'/%3E%3Crect x='312' y='100' width='64' height='54' rx='6' fill='%2316302b'/%3E
+%3Cpolyline points='320,132 332,132 338,114 346,146 352,126 368,126' fill='none' stroke='%235fe0a0' stroke-width='3'/%3E%3C/svg%3E" alt="Illustration of an operating table under a round surgical light beside a heart monitor" width="400" height="300">
+            <span class="visited-mark" aria-hidden="true">Visited</span>
+          </div>
+          <figcaption>
+            <span class="tag">Surgery</span>
+            <strong class="shot-title">Operating theatre</strong>
+            <span class="shot-text">Overhead surgical lights and a patient monitor for planned and emergency operations.</span>
+            <button type="button" class="btn-small needs-js" data-explore aria-pressed="false" aria-label="Mark as visited: Operating theatre">Mark as visited</button>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="shot">
+          <div class="shot-frame">
+            <img loading="lazy" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e6f2ef'/%3E%3Crect y='244' width='400' height='56' fill='%23cfe3de'/%3E
+%3Cpath d='M200 0v50M150 50h100M160 50v26M200 50v40M240 50v26' stroke='%230f6b63' stroke-width='3' fill='none'/%3E
+%3Ccircle cx='160' cy='84' r='9' fill='%23f2a900'/%3E%3Ccircle cx='200' cy='98' r='9' fill='%23b3261e'/%3E%3Ccircle cx='240' cy='84' r='9' fill='%23f2a900'/%3E
+%3Crect x='90' y='144' width='220' height='72' rx='8' fill='%23fff' stroke='%230f6b63' stroke-width='4'/%3E
+%3Cpath d='M120 144v72M150 144v72M180 144v72M210 144v72M240 144v72M270 144v72' stroke='%230f6b63' stroke-width='3'/%3E
+%3Crect x='90' y='136' width='220' height='10' rx='4' fill='%230f6b63'/%3E%3Crect x='100' y='216' width='8' height='30' fill='%230f6b63'/%3E%3Crect x='292' y='216' width='8' height='30' fill='%230f6b63'/%3E%3C/svg%3E" alt="Illustration of a baby cot with a hanging mobile" width="400" height="300">
+            <span class="visited-mark" aria-hidden="true">Visited</span>
+          </div>
+          <figcaption>
+            <span class="tag">Mother and child</span>
+            <strong class="shot-title">Newborn care unit</strong>
+            <span class="shot-text">A quiet, monitored space where newborns are cared for close to their mothers.</span>
+            <button type="button" class="btn-small needs-js" data-explore aria-pressed="false" aria-label="Mark as visited: Newborn care unit">Mark as visited</button>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="shot">
+          <div class="shot-frame">
+            <img loading="lazy" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e6f2ef'/%3E
+%3Crect x='40' y='108' width='320' height='8' fill='%230f6b63'/%3E%3Crect x='40' y='178' width='320' height='8' fill='%230f6b63'/%3E
+%3Cg fill='%23fff' stroke='%230f6b63' stroke-width='3'%3E%3Crect x='60' y='72' width='26' height='36'/%3E%3Crect x='136' y='76' width='30' height='32'/%3E%3Crect x='220' y='72' width='26' height='36'/%3E%3Crect x='296' y='76' width='30' height='32'/%3E
+%3Crect x='60' y='142' width='30' height='36'/%3E%3Crect x='140' y='134' width='26' height='44'/%3E%3Crect x='234' y='150' width='34' height='28'/%3E%3Crect x='300' y='140' width='26' height='38'/%3E%3C/g%3E
+%3Crect x='100' y='62' width='22' height='46' fill='%23f2a900'/%3E%3Crect x='180' y='68' width='24' height='40' fill='%23e6f2ef' stroke='%230f6b63' stroke-width='3'/%3E%3Crect x='260' y='60' width='22' height='48' fill='%23b3261e' opacity='.85'/%3E
+%3Crect x='100' y='152' width='28' height='26' fill='%23f2a900'/%3E%3Crect x='186' y='146' width='30' height='32' fill='%23b3261e' opacity='.85'/%3E
+%3Crect x='30' y='222' width='340' height='54' fill='%230f6b63'/%3E%3Crect x='24' y='212' width='352' height='14' rx='4' fill='%23fff' stroke='%230f6b63' stroke-width='3'/%3E
+%3Cpath d='M193 232h14v8h8v14h-8v8h-14v-8h-8v-14h8z' fill='%23fff'/%3E%3C/svg%3E" alt="Illustration of medicine bottles on shelves above a pharmacy counter" width="400" height="300">
+            <span class="visited-mark" aria-hidden="true">Visited</span>
+          </div>
+          <figcaption>
+            <span class="tag">Support services</span>
+            <strong class="shot-title">Pharmacy</strong>
+            <span class="shot-text">Prescriptions and over-the-counter medicines are dispensed at the counter, open 24 hours.</span>
+            <button type="button" class="btn-small needs-js" data-explore aria-pressed="false" aria-label="Mark as visited: Pharmacy">Mark as visited</button>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="shot">
+          <div class="shot-frame">
+            <img loading="lazy" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e6f2ef'/%3E%3Crect y='222' width='400' height='78' fill='%23cfe3de'/%3E
+%3Cpath d='M60 130h130M80 160h130M70 130v92M180 130v92M90 160v62M200 160v62' stroke='%230f6b63' stroke-width='6' stroke-linecap='round' fill='none'/%3E
+%3Crect x='230' y='226' width='140' height='12' rx='6' fill='%23f2a900'/%3E%3Ccircle cx='300' cy='182' r='42' fill='%230f6b63'/%3E
+%3Cpath d='M266 172q34-24 68 0' stroke='%23fff' stroke-width='3' fill='none' opacity='.6'/%3E
+%3Crect x='110' y='252' width='60' height='6' fill='%2316302b'/%3E%3Crect x='102' y='244' width='10' height='22' rx='3' fill='%2316302b'/%3E%3Crect x='168' y='244' width='10' height='22' rx='3' fill='%2316302b'/%3E%3C/svg%3E" alt="Illustration of parallel bars, an exercise ball and a mat" width="400" height="300">
+            <span class="visited-mark" aria-hidden="true">Visited</span>
+          </div>
+          <figcaption>
+            <span class="tag">Rehabilitation</span>
+            <strong class="shot-title">Physiotherapy gym</strong>
+            <span class="shot-text">Parallel bars, mats and exercise balls for recovery after surgery or injury.</span>
+            <button type="button" class="btn-small needs-js" data-explore aria-pressed="false" aria-label="Mark as visited: Physiotherapy gym">Mark as visited</button>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="shot">
+          <div class="shot-frame">
+            <img loading="lazy" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e6f2ef'/%3E%3Crect y='248' width='400' height='52' fill='%23cfe3de'/%3E
+%3Crect x='140' y='30' width='120' height='44' rx='8' fill='%230f6b63'/%3E%3Cpath d='M193 38h14v8h8v14h-8v8h-14v-8h-8v-14h8z' fill='%23fff'/%3E
+%3Ccircle cx='230' cy='112' r='16' fill='%230f6b63'/%3E%3Cpath d='M200 160c0-28 14-40 30-40s30 12 30 40z' fill='%230f6b63'/%3E
+%3Crect x='110' y='112' width='60' height='42' rx='4' fill='%2316302b'/%3E%3Crect x='118' y='120' width='44' height='6' fill='%235fe0a0'/%3E%3Crect x='134' y='154' width='12' height='8' fill='%2316302b'/%3E
+%3Crect x='50' y='170' width='300' height='80' fill='%230f6b63'/%3E%3Crect x='40' y='158' width='320' height='16' rx='4' fill='%23fff' stroke='%230f6b63' stroke-width='3'/%3E
+%3Cpath d='M272 156a14 12 0 0 1 28 0z' fill='%23f2a900'/%3E%3C/svg%3E" alt="Illustration of a reception desk with a staff member, a computer and a hospital sign" width="400" height="300">
+            <span class="visited-mark" aria-hidden="true">Visited</span>
+          </div>
+          <figcaption>
+            <span class="tag">Patient services</span>
+            <strong class="shot-title">Main reception</strong>
+            <span class="shot-text">Registration and information desk at the entrance, with staff to guide first-time visitors.</span>
+            <button type="button" class="btn-small needs-js" data-explore aria-pressed="false" aria-label="Mark as visited: Main reception">Mark as visited</button>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </section>
+
+  <!-- VIDEO + AUDIO -->
+  <section id="media" aria-labelledby="media-title">
+    <h2 id="media-title">Watch and listen</h2>
+    <div class="two-col">
+      <div class="media-box">
+        <h3>Hospital introduction (video)</h3>
+        <video controls preload="metadata" poster="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230f6b63'/%3E%3Cpath d='M280 130l110 50-110 50z' fill='white'/%3E%3C/svg%3E">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+          <!-- Captions: replace the data URI with your own file, e.g. src="captions-en.vtt" -->
+          <track kind="captions" srclang="en" label="English" default
+                 src="data:text/vtt;charset=utf-8,WEBVTT%0A%0A00:00:00.000%20--%3E%2000:00:04.000%0AWelcome%20to%20Riverside%20General%20Hospital.%0A%0A00:00:04.000%20--%3E%2000:00:09.000%0AThis%20is%20a%20sample%20caption%20track.">
+          Your browser does not support the video element.
+          <a href="https://www.w3schools.com/html/mov_bbb.mp4">Download the video</a>.
+        </video>
+        <p><small>Sample clip. Replace it with your own hospital video file (MP4).</small></p>
+        <details>
+          <summary>Video transcript</summary>
+          <p>A short tour of the hospital: the main entrance, the outpatient block, the wards and the Emergency Department.</p>
+        </details>
+      </div>
+
+      <div class="media-box">
+        <h3>Health tip of the week (audio)</h3>
+        <audio controls preload="none">
+          <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+          <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+          Your browser does not support the audio element.
+          <a href="https://www.w3schools.com/html/horse.mp3">Download the audio</a>.
+        </audio>
+        <p><small>Sample audio. Replace it with your own recording (MP3).</small></p>
+        <details>
+          <summary>Audio transcript</summary>
+          <p>"Drink water through the day, walk for thirty minutes, and get your blood pressure checked once a year. If you notice chest pain or sudden weakness, call 108 right away."</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- IFRAME: embedded map -->
+  <section id="location" aria-labelledby="loc-title">
+    <h2 id="loc-title">Find us</h2>
+    <p>12 Lake Road, Coimbatore, Tamil Nadu 641 001. Free parking is available at the main gate.</p>
+    <iframe title="Map showing the location of Riverside General Hospital in Coimbatore"
+            src="https://www.google.com/maps?q=Coimbatore,Tamil+Nadu&output=embed"
+            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+      Your browser does not support embedded maps.
+    </iframe>
+    <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Coimbatore" target="_blank" rel="noopener">Open in Google Maps</a></p>
+  </section>
+
+  <!-- CSS POSITIONING: one live demo for every position value -->
+  <section id="positioning" aria-labelledby="pos-title">
+    <h2 id="pos-title">CSS positioning in a hospital interface</h2>
+    <p class="notice">Each card shows one <code>position</code> value used the way a real hospital website uses it. Scroll the page and watch the red and teal buttons in the bottom corners: they are <code>fixed</code>.</p>
+
+    <div class="pos-grid">
+
+      <article class="pos-card">
+        <h3><code>position: static</code></h3>
+        <p>The default. Items follow the normal flow of the page, one under the other. <code>top</code> and <code>left</code> have no effect.</p>
+        <div class="demo">
+          <div class="slot slot-static">1. Check-in desk</div>
+          <div class="slot slot-static">2. Triage (top: 30px is ignored)</div>
+          <div class="slot slot-static">3. Consultation room</div>
+        </div>
+      </article>
+
+      <article class="pos-card">
+        <h3><code>position: relative</code></h3>
+        <p>The item is moved from its normal place, but the space it leaves behind stays reserved. Also used as the anchor for absolute children.</p>
+        <div class="demo">
+          <div class="slot">1. Check-in desk</div>
+          <div class="slot slot-shifted">2. Triage (moved 28px right)</div>
+          <div class="slot">3. Consultation room</div>
+        </div>
+      </article>
+
+      <article class="pos-card">
+        <h3><code>position: absolute</code></h3>
+        <p>The item is taken out of the flow and placed against its nearest positioned parent, like status badges on a bed card.</p>
+        <div class="demo">
+          <div class="bed">
+            <span class="pin pin-tr">ICU</span>
+            <span class="bed-name">Bed 12</span>
+            <span class="pin pin-bl">Isolation</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="pos-card">
+        <h3><code>position: fixed</code></h3>
+        <p>The item is placed against the browser window and stays there while the page scrolls. Hospitals use it for an always-visible emergency call button.</p>
+        <div class="demo">
+          <p class="fixed-note"><span class="chip chip-red">Emergency 108</span> bottom-left corner</p>
+          <p class="fixed-note"><span class="chip chip-teal">&uarr;</span> bottom-right corner</p>
+        </div>
+      </article>
+
+      <article class="pos-card">
+        <h3><code>position: sticky</code></h3>
+        <p>The item scrolls normally until it reaches a set edge, then sticks. Scroll this lab list: the headings stay in view.</p>
+        <div class="demo scroll-demo" tabindex="0" aria-label="Scrollable lab results list">
+          <div class="sticky-head">Lab results: today</div>
+          <div class="group">
+            <h4>Haematology</h4>
+            <ul><li>Haemoglobin</li><li>White cell count</li><li>Platelet count</li></ul>
+          </div>
+          <div class="group">
+            <h4>Biochemistry</h4>
+            <ul><li>Blood glucose</li><li>Creatinine</li><li>Cholesterol</li></ul>
+          </div>
+          <div class="group">
+            <h4>Radiology</h4>
+            <ul><li>Chest X-ray</li><li>Abdominal ultrasound</li><li>Brain MRI</li></ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="pos-card">
+        <h3>Where this page uses them</h3>
+        <ul class="pos-uses">
+          <li><strong>static:</strong> every section, by default</li>
+          <li><strong>relative:</strong> cards, figures and headings (anchors)</li>
+          <li><strong>absolute:</strong> doctor and tour badges, heading underline</li>
+          <li><strong>fixed:</strong> Emergency and back-to-top buttons</li>
+          <li><strong>sticky:</strong> the header on wide screens</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- RESPONSIVE DESIGN: the layout changes with CSS media queries -->
+  <section id="responsive" aria-labelledby="resp-title">
+    <h2 id="resp-title">One page for desktop, tablet and mobile</h2>
+    <p class="notice">You are viewing the <strong class="device-name"></strong> layout. Resize the browser window, or turn your phone sideways, to watch the page change at each breakpoint.</p>
+
+    <ul class="device-chips" aria-label="Screen size groups">
+      <li class="device-chip" data-device="desktop">Desktop<small>1101px and wider</small></li>
+      <li class="device-chip" data-device="tablet">Tablet<small>601px to 1100px</small></li>
+      <li class="device-chip" data-device="mobile">Mobile<small>600px and narrower</small></li>
+    </ul>
+
+    <div class="table-wrap">
+      <table class="stack-table">
+        <caption>How this page changes at each breakpoint</caption>
+        <thead><tr><th scope="col">Part of the page</th><th scope="col">Desktop</th><th scope="col">Tablet</th><th scope="col">Mobile</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Screen width</th><td data-label="Desktop">1101px and wider</td><td data-label="Tablet">601px to 1100px</td><td data-label="Mobile">600px and narrower</td></tr>
+          <tr><th scope="row">Header and menu</th><td data-label="Desktop">Sticky header with every link in one row</td><td data-label="Tablet">Menu button; links open in three columns</td><td data-label="Mobile">Menu button; links open in one column</td></tr>
+          <tr><th scope="row">Spacing and text</th><td data-label="Desktop">Roomy padding, full-size text</td><td data-label="Tablet">Medium padding, slightly smaller headings</td><td data-label="Mobile">Tight padding, smallest text, tagline hidden</td></tr>
+          <tr><th scope="row">About section</th><td data-label="Desktop">Text and photo side by side</td><td data-label="Tablet">Side by side, tighter gap</td><td data-label="Mobile">Photo and text stacked</td></tr>
+          <tr><th scope="row">Department and doctor cards</th><td data-label="Desktop">Three or four per row</td><td data-label="Tablet">Two per row</td><td data-label="Mobile">One per row</td></tr>
+          <tr><th scope="row">Photo gallery</th><td data-label="Desktop">Four columns</td><td data-label="Tablet">Three, then two columns</td><td data-label="Mobile">One column</td></tr>
+          <tr><th scope="row">Consultation timetable</th><td data-label="Desktop">Standard table</td><td data-label="Tablet">Standard table</td><td data-label="Mobile">Each row becomes a card</td></tr>
+          <tr><th scope="row">Forms and buttons</th><td data-label="Desktop">Fields in pairs, buttons side by side</td><td data-label="Tablet">Fields in pairs, buttons side by side</td><td data-label="Mobile">One field per row, full-width buttons</td></tr>
+          <tr><th scope="row">Footer</th><td data-label="Desktop">Three columns</td><td data-label="Tablet">Two columns</td><td data-label="Mobile">One column</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="emergency" aria-labelledby="em-title">
+    <h2 id="em-title">Emergency information</h2>
+    <div class="emergency">
+      <h3>24-hour Emergency Department</h3>
+      <p>Trauma, stroke, heart attack, burns and obstetric emergencies are treated on arrival.</p>
+      <p><strong>Emergency hotline:</strong> <a href="tel:+914222000108">+91 422 200 0108</a><br>
+         <strong>Ambulance:</strong> <a href="tel:108">108</a></p>
+    </div>
+    <h3>Go to the emergency department if you have:</h3>
+    <ul>
+      <li>Chest pain or pressure</li>
+      <li>Sudden weakness, slurred speech or facial droop</li>
+      <li>Severe bleeding or a serious injury</li>
+      <li>Difficulty breathing</li>
+    </ul>
+  </section>
+
+  <section id="appointment" aria-labelledby="form-title">
+    <h2 id="form-title">Patient registration and appointment request</h2>
+    <p class="notice">Fields marked <strong>*</strong> are required. Messages appear under each field as you fill it in. For emergencies, call <a href="tel:108">108</a> instead of using this form.</p>
+
+    <form id="reg-form" action="#" method="post" enctype="multipart/form-data" novalidate>
+
+      <!-- Summary of problems: filled in by script.js when the form is submitted with errors -->
+      <div class="form-summary" id="form-summary" role="alert" tabindex="-1" hidden></div>
+
+      <!-- 1. Personal details -->
+      <fieldset>
+        <legend>Personal details</legend>
+
+        <div class="row">
+          <div class="field">
+            <label for="fname" class="req">First name</label>
+            <input type="text" id="fname" name="first_name" required minlength="2" maxlength="40"
+                   pattern="[A-Za-z .'\-]+" title="Letters, spaces and . ' - only" placeholder="e.g. Priya" autocomplete="given-name">
+          </div>
+          <div class="field">
+            <label for="lname" class="req">Last name</label>
+            <input type="text" id="lname" name="last_name" required minlength="1" maxlength="40"
+                   pattern="[A-Za-z .'\-]+" title="Letters, spaces and . ' - only" placeholder="e.g. Sharma" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="dob" class="req">Date of birth</label>
+            <input type="date" id="dob" name="dob" required min="1900-01-01" max="2026-12-31">
+          </div>
+          <div class="field">
+            <label for="age">Age <span class="hint">(0 to 120)</span></label>
+            <input type="number" id="age" name="age" min="0" max="120" step="1" inputmode="numeric" placeholder="e.g. 34">
+          </div>
+        </div>
+
+        <fieldset class="choices">
+          <legend class="req">Gender</legend>
+          <label><input type="radio" name="gender" value="female" required> Female</label>
+          <label><input type="radio" name="gender" value="male"> Male</label>
+          <label><input type="radio" name="gender" value="other"> Other</label>
+          <label><input type="radio" name="gender" value="na"> Prefer not to say</label>
+        </fieldset>
+
+        <div class="field">
+          <label for="blood">Blood group</label>
+          <select id="blood" name="blood_group">
+            <option value="">Select if known</option>
+            <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <!-- 2. Contact details -->
+      <fieldset>
+        <legend>Contact details</legend>
+        <div class="row">
+          <div class="field">
+            <label for="email" class="req">Email</label>
+            <input type="email" id="email" name="email" required placeholder="name@example.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="phone" class="req">Mobile number</label>
+            <input type="tel" id="phone" name="phone" required pattern="[6-9][0-9]{9}"
+                   title="Enter a 10-digit mobile number starting with 6, 7, 8 or 9" placeholder="9876543210" autocomplete="tel">
+          </div>
+        </div>
+        <div class="field">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" rows="3" maxlength="200" autocomplete="street-address"></textarea>
+        </div>
+      </fieldset>
+
+      <!-- 3. Appointment -->
+      <fieldset>
+        <legend>Appointment details</legend>
+        <div class="row">
+          <div class="field">
+            <label for="dept" class="req">Department</label>
+            <select id="dept" name="department" required>
+              <option value="">Select a department</option>
+              <optgroup label="Specialities">
+                <option>Cardiology</option>
+                <option>Orthopaedics</option>
+                <option>Paediatrics</option>
+                <option>Obstetrics &amp; Gynaecology</option>
+                <option>Neurology</option>
+              </optgroup>
+              <optgroup label="Primary care">
+                <option>General Medicine</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="field">
+            <label for="adate" class="req">Preferred date</label>
+            <input type="date" id="adate" name="appointment_date" required min="2026-11-05" max="2027-12-31">
+          </div>
+        </div>
+
+        <fieldset class="choices">
+          <legend class="req">Visit type</legend>
+          <label><input type="radio" name="visit_type" value="new" required> First visit</label>
+          <label><input type="radio" name="visit_type" value="followup"> Follow-up</label>
+          <label><input type="radio" name="visit_type" value="second"> Second opinion</label>
+        </fieldset>
+
+        <div class="field">
+          <label for="reason" class="req">Reason for visit</label>
+          <textarea id="reason" name="reason" rows="4" required minlength="10" maxlength="500"
+                    placeholder="Describe your symptoms or the purpose of the visit (10 to 500 characters)"></textarea>
+        </div>
+      </fieldset>
+
+      <!-- 4. Medical history -->
+      <fieldset>
+        <legend>Medical history</legend>
+        <fieldset class="choices">
+          <legend>Existing conditions (tick all that apply)</legend>
+          <label><input type="checkbox" name="history" value="diabetes"> Diabetes</label>
+          <label><input type="checkbox" name="history" value="bp"> High blood pressure</label>
+          <label><input type="checkbox" name="history" value="heart"> Heart disease</label>
+          <label><input type="checkbox" name="history" value="asthma"> Asthma</label>
+          <label><input type="checkbox" name="history" value="allergy"> Drug allergy</label>
+        </fieldset>
+        <div class="field">
+          <label for="records">Upload previous reports <span class="hint">(PDF, JPG or PNG, max 5 MB each)</span></label>
+          <input type="file" id="records" name="records" accept=".pdf,.jpg,.jpeg,.png" multiple>
+        </div>
+      </fieldset>
+
+      <!-- 5. Patient portal account -->
+      <fieldset>
+        <legend>Patient portal account</legend>
+        <div class="row">
+          <div class="field">
+            <label for="pw" class="req">Password</label>
+            <input type="password" id="pw" name="password" required minlength="8" maxlength="64"
+                   pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" autocomplete="new-password"
+                   title="At least 8 characters with at least one letter and one number">
+            <span class="hint">At least 8 characters, with a letter and a number.</span>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 6. Consent -->
+      <fieldset class="choices">
+        <legend>Consent</legend>
+        <label><input type="checkbox" name="consent_treatment" required> I agree to the hospital's terms and consent to treatment. <span class="req"></span></label>
+        <label><input type="checkbox" name="sms_updates" value="yes"> Send me appointment reminders by SMS.</label>
+      </fieldset>
+
+      <div class="actions">
+        <button type="submit">Submit registration</button>
+        <button type="reset">Clear form</button>
+      </div>
+    </form>
+
+    <!-- SUCCESS CARD: shown after the form is sent -->
+    <div class="form-success" id="form-success" hidden>
+      <svg class="check" viewBox="0 0 52 52" aria-hidden="true" focusable="false">
+        <circle class="check-circle" cx="26" cy="26" r="24" fill="none"/>
+        <path class="check-mark" fill="none" d="M14 27l8 8 16-17"/>
+      </svg>
+      <h3 id="success-title" tabindex="-1">Request received</h3>
+      <p class="success-detail" id="success-detail"></p>
+      <p>The registration desk will confirm your appointment by phone or email. For anything urgent, call <a href="tel:+914222000100">+91 422 200 0100</a>.</p>
+      <button type="button" class="btn-solid" id="success-again">Make another request</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="cols">
+    <section>
+      <h2>Contact</h2>
+      <address>
+        Riverside General Hospital<br>
+        12 Lake Road, Coimbatore, Tamil Nadu 641 001<br>
+        Phone: <a href="tel:+914222000100">+91 422 200 0100</a><br>
+        Email: <a href="mailto:care@riversidegeneral.example">care@riversidegeneral.example</a>
+      </address>
+    </section>
+    <section>
+      <h2>Quick links</h2>
+      <ul>
+        <li><a href="#departments">Departments</a></li>
+        <li><a href="#doctors">Doctors</a></li>
+        <li><a href="#manage">Manage doctors</a></li>
+        <li><a href="#health-data">Health statistics</a></li>
+        <li><a href="#tasks">Task manager</a></li>
+        <li><a href="#media">Video &amp; audio</a></li>
+        <li><a href="#positioning">CSS positioning</a></li>
+        <li><a href="#responsive">Responsive design</a></li>
+        <li><a href="#appointment">Register / Book</a></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Opening hours</h2>
+      <p>Outpatient: Mon to Sat, 8 am to 6 pm<br>Emergency: 24 hours, every day</p>
+    </section>
+  </div>
+  <p style="text-align:center; margin:1.5rem 0 0;">&copy; 2026 Riverside General Hospital. Sample page for coursework.</p>
+</footer>
+
+
+<!-- DOCTOR PROFILE: opens from the "View profile" buttons -->
+<div class="modal" id="doctor-modal" aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button type="button" class="icon-btn modal-close" data-close aria-label="Close doctor profile">&times;</button>
+    <div class="modal-head">
+      <img id="modal-photo" src="" alt="" width="84" height="84">
+      <div>
+        <h3 id="modal-title"></h3>
+        <span class="tag" id="modal-dept"></span>
+      </div>
+    </div>
+    <span class="status-pill" id="modal-status">Available today</span>
+    <p id="modal-bio"></p>
+    <dl class="facts">
+      <div><dt>Clinic days</dt><dd id="modal-days"></dd></div>
+      <div><dt>Clinic hours</dt><dd id="modal-time"></dd></div>
+    </dl>
+    <div class="modal-actions">
+      <button type="button" class="btn-solid" id="modal-book"></button>
+      <button type="button" class="btn-small" data-close>Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS: small notifications are added here by script.js -->
+<div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+
+<a class="fab-call" href="tel:108" aria-label="Call emergency number 108">Emergency 108</a>
+<a class="back-to-top" href="#top" aria-label="Back to top">&uarr;</a>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+/* =====================================================
+   Riverside General Hospital – application interface
+   ===================================================== */
+
+/* ---------- 1. COLORS: design tokens ---------- */
+:root {
+  --ink: #16302b;          /* main text */
+  --teal: #0f6b63;         /* brand */
+  --teal-dark: #0a4f49;    /* hover state of brand */
+  --mint: #e6f2ef;         /* light brand tint */
+  --alert: #b3261e;        /* emergency / errors */
+  --alert-soft: #fdecea;
+  --amber: #f2a900;        /* focus ring + highlights */
+  --paper: #fbfdfc;
+  --app-bg: #eaf2ef;       /* page background behind cards */
+  --card: #ffffff;
+  --line: #c5d9d4;
+  --muted: #4d6862;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(15, 60, 54, .08), 0 8px 24px rgba(15, 60, 54, .08);
+  --shadow-hover: 0 4px 10px rgba(15, 60, 54, .12), 0 16px 32px rgba(15, 60, 54, .14);
+
+  /* FONT STYLING: families */
+  --font-head: "Manrope", "Trebuchet MS", Verdana, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* ---------- 2. BOX MODEL: every element's width includes padding + border ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* ---------- 3. FONT STYLING + BACKGROUNDS: base ---------- */
+body {
+  margin: 0;                           /* margin reset */
+  font-family: var(--font-body);
+  font-size: 1.0625rem;                /* 17px */
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--app-bg);           /* background color */
+  background-image: linear-gradient(180deg, #dcebe6 0, var(--app-bg) 320px); /* background gradient */
+  background-repeat: no-repeat;
+}
+
+h1, h2, h3, nav, th, label, legend, button, .hint, .tag, figcaption, summary {
+  font-family: var(--font-head);
+}
+h1, h2, h3 { line-height: 1.25; letter-spacing: -0.01em; font-weight: 700; }
+h2 { font-size: 1.6rem; font-weight: 800; }
+h3 { font-size: 1.1rem; margin: .2rem 0 .4rem; }
+p  { max-width: 68ch; margin: 0 0 1rem; }     /* readable line length */
+small { color: var(--muted); font-style: italic; }
+strong { font-weight: 700; }
+
+a { color: var(--teal); text-underline-offset: 3px; transition: color .2s; }
+a:hover { color: var(--teal-dark); text-decoration-thickness: 2px; }   /* HOVER */
+
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ---------- 4. CSS POSITIONING: sticky header, fixed button, relative/absolute accents ---------- */
+header {
+  position: relative;
+  z-index: 100;
+  background: var(--teal);
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;     /* BASIC LAYOUT: flexbox */
+  gap: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .2);
+}
+@media (min-width: 1100px) {
+  header { position: sticky; top: 0; }      /* stays visible while scrolling */
+}
+header .brand { display: flex; align-items: center; gap: .9rem; }
+header img { width: 56px; height: 56px; border-radius: 12px; }
+header h1 { margin: 0; font-size: 1.5rem; }
+header p  { margin: 0; font-size: .9rem; opacity: .9; }
+
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem; }
+nav a {
+  display: block;
+  padding: .45rem .85rem;             /* PADDING */
+  border-radius: 999px;               /* BORDER radius: pill */
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: .92rem;
+  transition: background-color .2s, color .2s, transform .2s;
+}
+nav a:hover { background: #fff; color: var(--teal); transform: translateY(-2px); }  /* HOVER */
+
+.emergency-bar {
+  background: var(--alert);
+  color: #fff;
+  text-align: center;                 /* TEXT ALIGNMENT */
+  padding: .65rem 1rem;
+  font-family: var(--font-head);
+  font-size: .95rem;
+}
+.emergency-bar a { color: #fff; font-weight: 800; }
+.emergency-bar a:hover { color: #ffe08a; }
+
+/* fixed "back to top" button (always in the bottom-right corner) */
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 200;
+  width: 48px;                        /* WIDTH / HEIGHT */
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  font: 800 1.3rem/1 var(--font-head);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: background-color .2s, transform .2s;
+}
+.back-to-top:hover { background: var(--teal-dark); color: #fff; transform: translateY(-4px); }
+
+/* ---------- 5. BASIC PAGE LAYOUT: centered container + card sections ---------- */
+main {
+  width: 100%;
+  max-width: 1080px;                  /* WIDTH */
+  margin: 0 auto;                     /* centers the page content */
+  padding: 2rem 1.5rem 1rem;
+}
+
+main > section {
+  background: var(--card);
+  border: 1px solid var(--line);      /* BORDER */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem 2.25rem;
+  margin-bottom: 1.75rem;             /* MARGIN between cards */
+  scroll-margin-top: 6rem;            /* anchor links clear the sticky header */
+}
+
+main > section h2 {
+  position: relative;                 /* anchor for the absolute underline */
+  margin: 0 0 1.5rem;
+  padding-bottom: .7rem;
+  color: var(--teal);
+}
+main > section h2::after {
+  content: "";
+  position: absolute;                 /* CSS POSITIONING: absolute inside relative */
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--amber);
+}
+
+.hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: center; }
+.hero p:first-of-type { font-size: 1.15rem; }
+
+.grid     { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+.two-col  { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+/* ---------- 6. CARDS / CONTAINERS ---------- */
+article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teal);       /* thick left border accent */
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem;
+  box-shadow: 0 1px 2px rgba(15, 60, 54, .06);
+  transition: transform .25s ease, box-shadow .25s ease, border-left-color .25s;
+}
+article:hover {                                   /* HOVER */
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-left-color: var(--amber);
+}
+article h3 { color: var(--teal); }
+article ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+article li { margin-bottom: .2rem; }
+article img {
+  float: left;
+  width: 90px;                        /* fixed width + height for avatars */
+  height: 90px;
+  margin: 0 1rem .5rem 0;
+  border-radius: 50%;
+  border: 3px solid var(--mint);
+  background: var(--mint);
+}
+article::after { content: ""; display: block; clear: both; }
+
+.tag {
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  padding: .1rem .7rem;
+  border-radius: 999px;
+  background: var(--mint);
+  color: var(--teal-dark);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+/* figures (virtual tour, hero) */
+figure {
+  margin: 0;
+  overflow: hidden;                   /* clips the zoom effect inside the rounded border */
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(15, 60, 54, .06);
+  transition: box-shadow .25s, transform .25s;
+}
+figure img { display: block; width: 100%; height: auto; transition: transform .4s ease; }
+figure:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+figure:hover img { transform: scale(1.06); }       /* HOVER: gentle zoom */
+figcaption { padding: .6rem .9rem; font-size: .92rem; font-weight: 600; background: var(--mint); }
+
+/* media */
+.media-box {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+  transition: box-shadow .25s;
+}
+.media-box:hover { box-shadow: var(--shadow-hover); }
+video, iframe { display: block; width: 100%; border: 0; border-radius: 10px; background: #000; }
+video  { aspect-ratio: 16 / 9; }
+iframe { aspect-ratio: 16 / 9; min-height: 320px; background: var(--mint); }
+audio  { width: 100%; margin: .5rem 0; }
+
+details {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: .65rem 1rem;
+  margin-top: .8rem;
+  transition: background-color .2s;
+}
+details:hover { background: var(--mint); }
+details[open] { background: var(--card); }
+summary { cursor: pointer; font-weight: 700; color: var(--teal); }
+
+/* ---------- 7. TABLE ---------- */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; background: var(--card); }
+caption { text-align: left; font-weight: 700; padding: .6rem .8rem; color: var(--muted); }
+th, td { padding: .7rem .9rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+thead th { background: var(--teal); color: #fff; font-size: .95rem; }
+tbody th { background: var(--mint); }
+tbody tr:nth-child(even) td { background: var(--paper); }
+tbody tr { transition: background-color .15s; }
+tbody tr:hover td { background: var(--mint); }                /* HOVER: row highlight */
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+
+/* ---------- 8. EMERGENCY + NOTICE BLOCKS ---------- */
+.emergency {
+  background: var(--alert-soft);
+  border: 2px solid var(--alert);
+  border-radius: 12px;
+  padding: 1.1rem 1.5rem;
+  margin: 0 0 1.5rem;
+}
+.emergency h3 { color: var(--alert); margin-top: 0; }
+.emergency p:last-child { margin-bottom: 0; }
+.emergency a { color: var(--alert); font-weight: 700; }
+
+.notice {
+  background: var(--mint);
+  border-left: 5px solid var(--teal);
+  border-radius: 0 10px 10px 0;
+  padding: .8rem 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- 9. FORM ---------- */
+form { display: grid; gap: 1.4rem; }
+fieldset {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.1rem 1.4rem 1.4rem;
+}
+legend { padding: 0 .5rem; font-size: 1.1rem; font-weight: 800; color: var(--teal); }
+.field { display: grid; gap: .35rem; }
+.row   { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+label, .group-label { font-weight: 700; font-size: .98rem; }
+.req::after { content: " *"; color: var(--alert); }
+.hint { font-size: .85rem; font-weight: 400; color: var(--muted); }
+
+input[type=text], input[type=email], input[type=password], input[type=number],
+input[type=date], input[type=tel], input[type=file], select, textarea {
+  width: 100%;
+  min-height: 44px;                   /* HEIGHT: comfortable touch target */
+  padding: .6rem .8rem;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid #7a9a94;
+  border-radius: 8px;
+  transition: border-color .2s, box-shadow .2s;
+}
+input:hover, select:hover, textarea:hover { border-color: var(--teal); }          /* HOVER */
+input:focus, select:focus, textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 4px var(--mint); }
+textarea { resize: vertical; }
+input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: var(--alert); background: #fff6f5; }
+input:user-valid, select:user-valid { border-color: #2e7d32; }
+
+.choices, fieldset.choices { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
+.choices label {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-weight: 400;
+  padding: .3rem .6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.choices label:hover { background: var(--mint); }                                 /* HOVER */
+input[type=radio], input[type=checkbox] { width: 1.1rem; height: 1.1rem; accent-color: var(--teal); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+button {
+  padding: .8rem 1.7rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 2px solid var(--teal);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .2s, color .2s, transform .2s, box-shadow .2s;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(15, 107, 99, .25); }   /* HOVER */
+button:active { transform: translateY(0); box-shadow: none; }
+button[type=submit] { background: var(--teal); color: #fff; }
+button[type=submit]:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+button[type=reset]  { background: #fff; color: var(--teal); }
+button[type=reset]:hover  { background: var(--mint); }
+
+/* ---------- 10. FOOTER ---------- */
+footer { margin-top: 2rem; padding: 2.5rem 1.5rem 2rem; background: var(--ink); color: #dfeae7; }
+footer .cols {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+footer h2 { margin: 0 0 .6rem; font-size: 1.1rem; color: #fff; }
+footer address { font-style: normal; }
+footer ul { list-style: none; margin: 0; padding: 0; }
+footer li { margin-bottom: .3rem; }
+footer a { color: #fff; transition: color .2s; }
+footer a:hover { color: var(--amber); }
+footer > p { border-top: 1px solid rgba(255, 255, 255, .15); padding-top: 1.25rem; }
+
+/* ---------- 11. RESPONSIVE ---------- */
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; gap: 1.25rem; }
+  main { padding: 1rem .75rem 0; }
+  main > section { padding: 1.4rem 1.1rem; }
+  header { padding: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
